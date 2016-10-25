@@ -4,5 +4,6 @@ from django.http import HttpResponseRedirect
 from . import views
 
 urlpatterns  = [
-        url(r'postNewInfo', views.postNewInfo, name="postNewInfo"),
+    url(r'passageiros$', views.passageiros, name="passageiros"),
+    url(r'passageiros/(?P<documento>\w{0,50})/bagagens', views.bagagens, name="bagagens"),
 ]
