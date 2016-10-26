@@ -15,6 +15,8 @@
 
     <title>Bem-Vindo</title>
 
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
     <!-- Bootstrap Core CSS -->
     <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
 
@@ -142,24 +144,28 @@
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-4 text-center">
 
-                        <input class="form-control" placeholder="Nome"><br/>
-                        <input class="form-control" placeholder="Sobrenome"><br/>
-                        <div class='input-group date' id='dataNascimento'>
-                           <input type='text' class="form-control" placeholder="Data Nascimento"/>
-                           <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                           </span>
-                           <script type="text/javascript">
-                               $(function () {
-                                   $('#dataNascimento').datepicker({
-                                     container:'#dataNascimento'
-                                   });
-                               });
-                           </script>
-                        </div><br />
-                        <input class="form-control" placeholder="Nacionalidade"><br/>
-                        <input class="form-control" placeholder="Tag"><br/>
-                        <input class="form-control" placeholder="Bagagem"><br/>
+                  <div class="input-group input-group-md">
+                    <span class="input-group-addon">Nome</span>
+                    <input class="form-control input-size-fixed" placeholder="Nome">
+                  </div><br/>
+
+                  <div class="input-group input-group-md">
+                    <span class="input-group-addon">Sobrenome</span>
+                    <input class="form-control input-size-fixed" placeholder="Sobrenome">
+                  </div><br/>
+
+                  <div class="input-group input-group-md">
+                    <span class="input-group-addon">Nascimento</span>
+                    <input class="form-control input-size-fixed-calen" placeholder="dd/mm/aa">
+                    <span class="input-group-addon calen-type">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div><br/>
+
+                  <div class="input-group input-group-md">
+                    <span class="input-group-addon">Nacionalidade</span>
+                    <input class="form-control input-size-fixed" placeholder="Nacionalidade">
+                  </div><br/>
                 </div>
             </div>
         </div>
@@ -189,9 +195,8 @@
 
 
     <!-- jQuery -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <!--<script src="{% static "vendor/jquery/jquery.min.js" %}"></script>-->
+    <!--<script src="{% static "vendor/jquery/jquery.js" %}"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>
@@ -202,9 +207,13 @@
     <script src="{% static "vendor/scrollreveal/scrollreveal.min.js" %}"></script>
     <script src="{% static "vendor/magnific-popup/jquery.magnific-popup.min.js" %}"></script>
 
-
-
-
+    <script type="text/javascript">
+        $(function () {
+            $('#dataNascimento').datepicker({
+              container:'#dataNascimento'
+            });
+        });
+    </script>
 
     <!-- Theme JavaScript -->
     <script src="{% static "js/creative.min.js" %}"></script>

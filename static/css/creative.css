@@ -419,3 +419,20 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #222222;
 }
+
+.input-group-addon {
+    min-width:150px;// if you want width please write here //
+    text-align:center;
+}
+
+.input-size-fixed {
+    min-width:400px;// if you want width please write here //
+}
+
+.input-size-fixed-calen {
+    min-width:350px;// if you want width please write here //
+}
+
+.calen-type {
+    max-width:50px;// if you want width please write here //
+}
