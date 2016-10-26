@@ -5,6 +5,8 @@
 
     {% load static %}
 
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,7 +75,7 @@
                 <h1 id="homeHeading">A maneira mais segura de viajar</h1>
                 <hr>
                 <p>Com nossos serviços, você viaja tranquilo, sabendo que sua bagagem estará sempre segura</p>
-                <a href="#about" class="page-scroll btn btn-default btn-xl sr-button">Cadastro de passageiro</a>
+                <a href="#about" class="page-scroll btn btn-default btn-xl sr-button">Consulta de bagagem</a>
             </div>
         </div>
     </header>
@@ -127,6 +129,42 @@
         </div>
     </section>
 
+    <section id="cadastro_passageiro">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Cadastro de passageiro</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 text-center">
+
+                        <input class="form-control" placeholder="Nome"><br/>
+                        <input class="form-control" placeholder="Sobrenome"><br/>
+                        <div class='input-group date' id='dataNascimento'>
+                           <input type='text' class="form-control" placeholder="Data Nascimento"/>
+                           <span class="input-group-addon">
+                               <span class="glyphicon glyphicon-calendar"></span>
+                           </span>
+                           <script type="text/javascript">
+                               $(function () {
+                                   $('#dataNascimento').datepicker({
+                                     container:'#dataNascimento'
+                                   });
+                               });
+                           </script>
+                        </div><br />
+                        <input class="form-control" placeholder="Nacionalidade"><br/>
+                        <input class="form-control" placeholder="Tag"><br/>
+                        <input class="form-control" placeholder="Bagagem"><br/>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="bg-primary" id="contact">
         <div class="container">
             <div class="row">
@@ -151,15 +189,22 @@
 
 
     <!-- jQuery -->
-    <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!--<script src="{% static "vendor/jquery/jquery.min.js" %}"></script>-->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>
 
     <!-- Plugin JavaScript -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="{% static "vendor/scrollreveal/scrollreveal.min.js" %}"></script>
     <script src="{% static "vendor/magnific-popup/jquery.magnific-popup.min.js" %}"></script>
+
+
+
+
 
     <!-- Theme JavaScript -->
     <script src="{% static "js/creative.min.js" %}"></script>
