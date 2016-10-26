@@ -16,6 +16,8 @@
     <title>Bem-Vindo</title>
 
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
@@ -154,12 +156,15 @@
                     <input class="form-control input-size-fixed" placeholder="Sobrenome">
                   </div><br/>
 
-                  <div class="input-group input-group-md">
+                  <div class="input-group input-group-md date" data-provider="datepicker">
                     <span class="input-group-addon">Nascimento</span>
-                    <input class="form-control input-size-fixed-calen" placeholder="dd/mm/aa">
-                    <span class="input-group-addon calen-type">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+                    <input class="form-control input-size-fixed" id="nascData" placeholder="dd/mm/aa">
+                    <script type="text/javascript">
+                      $('#nascData').datepicker({
+                        format: 'mm/dd/yyyy',
+                        startDate: '-3d'
+                      });
+                    </script>
                   </div><br/>
 
                   <div class="input-group input-group-md">
@@ -207,13 +212,7 @@
     <script src="{% static "vendor/scrollreveal/scrollreveal.min.js" %}"></script>
     <script src="{% static "vendor/magnific-popup/jquery.magnific-popup.min.js" %}"></script>
 
-    <script type="text/javascript">
-        $(function () {
-            $('#dataNascimento').datepicker({
-              container:'#dataNascimento'
-            });
-        });
-    </script>
+
 
     <!-- Theme JavaScript -->
     <script src="{% static "js/creative.min.js" %}"></script>
