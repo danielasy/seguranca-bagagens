@@ -119,15 +119,19 @@
                 </div>
                 <div class="col-lg-4 col-md-4 text-center">
                     <div class="service-box">
-                        <i class="fa fa-4x fa-shopping-bag text-primary sr-icons" style="color:blue"></i>
-                        <h3>Localizacação</h3>
+                        <a href="#divCadastroBagagem" class="" data-toggle="collapse">
+                          <i class="fa fa-4x fa-shopping-bag text-primary sr-icons" style="color:blue"></i>
+                          <h3>Localizacação</h3>
+                        </a>
                         <p class="text-muted">Cadastre a Localizacação de bagagem</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 text-center">
                     <div class="service-box">
+                      <a href="#divCadastroTag" class="" data-toggle="collapse">
                         <i class="fa fa-4x fa-tags text-primary sr-icons" style="color:blue"></i>
                         <h3>Tag</h3>
+                      </a>
                         <p class="text-muted">Cadastre tags</p>
                     </div>
                 </div>
@@ -211,50 +215,59 @@
                   </div>
               </div>
           </div>
-    <section id="cadastro_passageiro">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Cadastro de passageiro</h2>
-                    <hr class="primary">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-4 text-center">
+    </div>
 
-                  <div class="input-group input-group-md">
-                    <span class="input-group-addon">Nome</span>
-                    <input class="form-control input-size-fixed" placeholder="Nome">
-                  </div><br/>
+    <div id="divCadastroBagagem" class="collapse">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 class="section-heading">Localização de Bagagem</h2>
+                  <hr class="primary">
+              </div>
+          </div>
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-4 col-lg-offset-4 text-center">
 
-                  <div class="input-group input-group-md">
-                    <span class="input-group-addon">Sobrenome</span>
-                    <input class="form-control input-size-fixed" placeholder="Sobrenome">
-                  </div><br/>
+                <div class="input-group input-group-md">
+                  <span class="input-group-addon">Documento</span>
+                  <input class="form-control input-size-fixed" placeholder="Documento">
+                </div><br/>
 
-                  <div class="input-group input-group-md date" data-provider="datepicker">
-                    <span class="input-group-addon">Nascimento</span>
-                    <input class="form-control input-size-fixed" id="nascData" placeholder="dd/mm/aa">
-                    <script type="text/javascript">
-                      $('#nascData').datepicker({
-                        dateFormat: 'dd/mm/yy',
-                        startDate: '-3d'
-                      });
-                    </script>
-                  </div><br/>
+                <div class="input-group input-group-md">
+                  <span class="input-group-addon">Localização</span>
+                  <input class="form-control input-size-fixed" placeholder="Localização">
+                </div><br/>
 
-                  <div class="input-group input-group-md">
-                    <span class="input-group-addon">Nacionalidade</span>
-                    <input class="form-control input-size-fixed" placeholder="Nacionalidade">
-                  </div><br/>
-                </div>
-            </div>
-        </div>
+              </div>
+          </div>
+      </div>
+    </div>
 
+    <div id="divCadastroTag" class="collapse">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 class="section-heading">Cadastro de Tag</h2>
+                  <hr class="primary">
+              </div>
+          </div>
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-4 col-lg-offset-4 text-center">
 
-    </section>
+                <div class="input-group input-group-md">
+                  <span class="input-group-addon">Tag</span>
+                  <input class="form-control input-size-fixed" placeholder="Tag">
+                </div><br/>
+              </div>
+          </div>
+      </div>
+    </div>
+
+  </section>
 
 
     <section class="bg-primary" id="contact">
