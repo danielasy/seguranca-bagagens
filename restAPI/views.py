@@ -4,6 +4,30 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import Passageiro,Bagagem
 from datetime import datetime
 
+'''
+GET     /passageiros
+    lista todos os passageiros
+POST    /passageiros
+    cria novo passageiro
+GET     /passageiros/<documento>
+    lista passageiro com documento = <documento>
+GET     /passageiros/<documento>/bagagens
+    lista todas as bagagens do passageiro com documento = <documento>
+POST    /passageiros/<documento>/bagagens
+    cria nova bagagem para passageiro com documento = <documento>
+
+GET     /bagagens
+    lista todas as bagagens
+
+GET     /tags
+    lista todas as tags
+
+GET     /leituras
+    lista todas as leituras de tags
+POST    /leituras
+    cria nova leitura de tag
+'''
+
 @csrf_exempt
 def passageiros(request):
     if request.method == 'GET':
