@@ -289,7 +289,16 @@
     </section>
 
     <script>
-        $('#accordion').on('show.bs.collapse', function () {
+        $('#divCadastroPassageiro').on('show.bs.collapse', function () {
+            $('#divCadastroBagagem').collapse('hide');
+            $('#divCadastroTag').collapse('hide');
+        });
+
+        $('#divCadastroBagagem').on('show.bs.collapse', function () {
+            $('#accordion .in').collapse('hide');
+        });
+
+        $('#divCadastroTag').on('show.bs.collapse', function () {
             $('#accordion .in').collapse('hide');
         });
     </script>
