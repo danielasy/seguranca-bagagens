@@ -7,6 +7,7 @@ class Tag(Document):
 
 class Bagagem(Document):
     documento = StringField(required=True)
+    localizacao = StringField(required=True)
     peso = StringField(required=True)
     tag_id = StringField()
 

@@ -58,12 +58,13 @@ def bagagens(request, documento):
         result = Bagagem.objects(documento=documento)
         return HttpResponse(result.to_json(), content_type="application/json")
     if request.method == 'POST':
+        localizacao = request.POST['localizacao']
         peso = request.POST['peso']
 
         reply = {}
 
         try:
-            bagagem = Bagagem(documento=documento,peso=peso)
+            bagagem = Bagagem(documento=documento,localizacao=localizacao,peso=peso)
             bagagem.save()
             reply['result'] = "ok"
         except Exception as e:

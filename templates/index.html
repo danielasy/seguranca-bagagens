@@ -80,19 +80,22 @@
                 <h1 id="homeHeading">A maneira mais segura de viajar</h1>
                 <hr>
                 <p>Com nossos serviços, você viaja tranquilo, sabendo que sua bagagem estará sempre segura</p>
-                <a href="#about" class="page-scroll btn btn-default btn-xl sr-button">Consulta de bagagem</a>
+                <a href="#consultaBagagem" class="page-scroll btn btn-default btn-xl sr-button">Consulta de bagagem</a>
             </div>
         </div>
     </header>
 
-    <section class="bg-primary" id="about">
+    <section class="bg-primary" id="consultaBagagem">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Consulte aqui a sua bagagem</h2>
                     <hr class="light">
                     <p class="text-faded">Você pode consultar a localização da sua bagagem aqui</p>
-                    <input class="form-control input-size-fixed text-center" placeholder="Numero do documento">
+                    <form action='' name="consultaBagagemForm" id="consultaBagagemForm" method="GET">
+                         <input class="form-control input-size-fixed text-center" placeholder="Numero do documento" id="documentoInput">
+                    </form>
+                   <div id="info"></div>
                 </div>
             </div>
         </div>
@@ -313,6 +316,34 @@
 
     <!-- Theme JavaScript -->
     <script src="{% static "js/creative.min.js" %}"></script>
+    <script type="text/javascript">
+        $('#consultaBagagemForm').submit(function(e){
+            e.preventDefault();
+          var documento = $('#documentoInput').val();
+          $(this).attr('action', "/restAPI/passageiros/" + documento + "/bagagens");
+
+          $.ajax({
+             url: "/restAPI/passageiros/" + documento + "/bagagens",
+             error: function() {
+                $('#info').html('<p>An error has occurred</p>');
+             },
+             dataType: 'json',
+             success: function(data) {
+                // var jsonData = JSON.parse(data);
+
+                console.log(data);
+                $.each(data, function(i, item){
+                    $('#info').append('<br/><p>' + 
+                        'Sua bagagem tem peso: ' + item.peso + 'kg</br>' + 
+                        'Atualmente se localiza em: ' + item.localizacao + '</br>' + 
+                        '</p>');
+                    console.log(item);
+                });
+             },
+             type: 'GET'
+          });
+        }); 
+    </script>
 
 </body>
 
