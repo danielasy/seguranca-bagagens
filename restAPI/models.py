@@ -1,13 +1,14 @@
 from django.db import models
 from mongoengine import *
 
-class Tag(EmbeddedDocument):
+class Tag(Document):
     tag_id = StringField(required=True)
     date_time = DateTimeField(auto_now=True)
 
-class Bagagem(EmbeddedDocument):
+class Bagagem(Document):
+    documento = StringField(required=True)
     peso = StringField(required=True)
-    tag = ListField(EmbeddedDocumentField(Tag))
+    tag_id = StringField()
 
 class Passageiro(Document):
     nome = StringField(required=True)
@@ -15,8 +16,7 @@ class Passageiro(Document):
     data_nascimento = DateTimeField(auto_now=False)
     documento = StringField(required=True)
     nacionalidade = StringField(required=True)
-    tag = ListField(EmbeddedDocumentField(Tag))
-    bagagens = ListField(EmbeddedDocumentField(Bagagem))
+    tag_id = StringField()
 
 class Leitura(Document):
     tag_id = StringField(required=True)
