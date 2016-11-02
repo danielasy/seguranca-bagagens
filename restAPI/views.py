@@ -3,7 +3,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import Passageiro,Bagagem
 from datetime import datetime
-from pprint import pprint
 
 '''
 GET     /passageiros
@@ -35,19 +34,22 @@ def passageiros(request):
         result = Passageiro.objects()
         return HttpResponse(result.to_json(), content_type="application/json")
     if request.method == 'POST':
-        nome = request.POST['nome']
-        sobrenome = request.POST['sobrenome']
-        data_nascimento = request.POST['data_nascimento']
-        documento = request.POST['documento']
-        nacionalidade = request.POST['nacionalidade']
+        nome = request.POST.get('nome')
+        sobrenome = request.POST.get('sobrenome')
+        data_nascimento = request.POST.get('nascimento')
+        documento = request.POST.get('documento')
+        nacionalidade = request.POST.get('nacionalidade')
+        tag = request.POST.get('tag')
 
         reply = {}
 
         try:
-            passageiro = Passageiro.objects.create(nome=nome, sobrenome=sobrenome, data_nascimento=datetime.strptime(data_nascimento, '%d/%m/%Y'), documento=documento, nacionalidade=nacionalidade)
+            passageiro = Passageiro.objects.create(nome=nome, sobrenome=sobrenome, data_nascimento=datetime.strptime(data_nascimento, '%d/%m/%Y'), documento=documento, nacionalidade=nacionalidade, tag_id=tag)
+            print(passageiro)
             passageiro.save()
             reply['result'] = "ok"
         except Exception as e:
+            print('Deu erro')
             reply['result'] = "Error while saving data to database"
 
         return JsonResponse(reply)
@@ -58,13 +60,15 @@ def bagagens(request, documento):
         result = Bagagem.objects(documento=documento)
         return HttpResponse(result.to_json(), content_type="application/json")
     if request.method == 'POST':
-        localizacao = request.POST['localizacao']
-        peso = request.POST['peso']
+        localizacao = request.POST.get('localizacao')
+        peso = request.POST.get('peso')
+        tag_id = request.POST.get('tag_id')
 
         reply = {}
 
         try:
-            bagagem = Bagagem(documento=documento,localizacao=localizacao,peso=peso)
+            bagagem = Bagagem(documento=documento,localizacao=localizacao,peso=peso, tag_id=tag_id)
+            print(bagagem)
             bagagem.save()
             reply['result'] = "ok"
         except Exception as e:

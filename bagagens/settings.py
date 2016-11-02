@@ -52,7 +52,7 @@ MIDDLEWARE = [
 ]
 
 from mongoengine import connect
-connect('admin', username='labproc', password='labproc2016', host='127.0.0.1', port=27017)
+connect('bagagens', username='labprocUser', password='labproc', host='104.236.123.31', port=27017)
 
 ROOT_URLCONF = 'bagagens.urls'
 

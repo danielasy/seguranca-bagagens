@@ -156,70 +156,88 @@
                 </div>
                 <div id="cadastros" class="container">
                     <div class="row">
-                        <div class="col-lg-4 col-lg-offset-4 text-center">
-                            <div class="input-group input-group-md">
-                                <span class="input-group-addon">Nome</span>
-                                <input class="form-control input-size-fixed" placeholder="Nome">
-                            </div><br/>
+                        <form action='' name="cadastraPassageiroForm" id="cadastraPassageiroForm" method="POST">
+                             <div class="col-lg-4 col-lg-offset-4 text-center">
+                                 <div class="input-group input-group-md">
+                                     <span class="input-group-addon">Nome</span>
+                                     <input class="form-control input-size-fixed" placeholder="Nome" id="nomePassageiroInput">
+                                 </div><br/>
 
-                            <div class="input-group input-group-md">
-                                <span class="input-group-addon">Sobrenome</span>
-                                <input class="form-control input-size-fixed" placeholder="Sobrenome">
-                            </div><br/>
+                                 <div class="input-group input-group-md">
+                                     <span class="input-group-addon">Sobrenome</span>
+                                     <input class="form-control input-size-fixed" placeholder="Sobrenome" id="sobrenomePassageiroInput">
+                                 </div><br/>
 
-                            <div class="input-group input-group-md date" data-provider="datepicker">
-                                <span class="input-group-addon">Nascimento</span>
-                                <input class="form-control input-size-fixed" id="nascData" placeholder="dd/mm/aa">
-                                <script type="text/javascript">
-                                    $('#nascData').datepicker({
-                                        format: 'mm/dd/yyyy',
-                                        startDate: '-3d'
-                                    });
-                                </script>
-                            </div><br/>
+                                 <div class="input-group input-group-md">
+                                     <span class="input-group-addon">Documento</span>
+                                     <input class="form-control input-size-fixed" placeholder="documento" id="documentoPassageiroInput">
+                                 </div><br/>
 
-                            <div class="input-group input-group-md">
-                                <span class="input-group-addon">Nacionalidade</span>
-                                <input class="form-control input-size-fixed" placeholder="Nacionalidade">
-                            </div><br/>
+                                 <div class="input-group input-group-md date" data-provider="datepicker">
+                                     <span class="input-group-addon">Nascimento</span>
+                                     <input class="form-control input-size-fixed" id="nascData" placeholder="dd/mm/aaaa">
+                                     <script type="text/javascript">
+                                         $('#nascData').datepicker({
+                                             dateFormat: 'dd/mm/yy',
+                                             startDate: '-3d'
+                                         });
+                                     </script>
+                                 </div><br/>
 
-                            <div class="input-group input-group-md">
-                                <a href="#adicionarBagagemDiv" class="btn btn-primary btn-md" data-toggle="collapse">Adicionar bagagem</a>
-                            </div>
+                                 <div class="input-group input-group-md">
+                                     <span class="input-group-addon">Nacionalidade</span>
+                                     <input class="form-control input-size-fixed" placeholder="Nacionalidade" id="nacionalidadePassageiroInput">
+                                 </div><br/>
 
-                            <div id="adicionarBagagemDiv" class="collapse">
-                                <br/>
-                                <div class="input-group input-group-md">
-                                    <span class="input-group-addon">Peso</span>
-                                    <input class="form-control input-size-fixed" placeholder="Peso">
-                                </div>
-                                <br/>
-                                <div class="input-group input-group-md">
-                                    <span class="input-group-addon">Tag</span>
-                                    <input class="form-control input-size-fixed" placeholder="Tag">
-                                </div>
-                                <br/>
-                                <div class="input-group input-group-md">
-                                    <span class="input-group-addon">Localizacao</span>
-                                    <input class="form-control input-size-fixed" placeholder="Localizacao">
-                                </div>
-                            </div>
+                                 <div class="input-group input-group-md">
+                                     <a href="#adicionarBagagemDiv" class="btn btn-primary btn-md" data-toggle="collapse">Adicionar bagagem</a>
+                                 </div>
 
-                            <br/>
-                            <div class="input-group input-group-md">
-                                <a href="#adicionarTagDiv" class="btn btn-primary btn-md" data-toggle="collapse">Adicionar Tag</a>
-                            </div>
+                                 <div id="adicionarBagagemDiv" class="collapse">
+                                     <br/>
+                                     <div class="input-group input-group-md">
+                                         <span class="input-group-addon">Peso</span>
+                                         <input class="form-control input-size-fixed" placeholder="Peso" id="pesoBagagemInput">
+                                     </div>
+                                     <br/>
+                                     <div class="input-group input-group-md">
+                                         <span class="input-group-addon">Tag</span>
+                                         <input class="form-control input-size-fixed" placeholder="Tag da bagagem" id="tagBagagemInput">
+                                     </div>
+                                     <br/>
+                                     <div class="input-group input-group-md">
+                                         <span class="input-group-addon">Localizacao</span>
+                                         <input class="form-control input-size-fixed" placeholder="Localizacao" id="localizacaoBagagemInput">
+                                     </div>
+                                 </div>
 
-                            <div id="adicionarTagDiv" class="collapse">
-                                <br/>
-                                <div class="input-group input-group-md">
-                                    <span class="input-group-addon">Tag</span>
-                                    <input class="form-control input-size-fixed" placeholder="Tag">
-                                </div>
-                            </div>
-                        </div>
+                                 <br/>
+                                 <div class="input-group input-group-md">
+                                     <a href="#adicionarTagDiv" class="btn btn-primary btn-md" data-toggle="collapse">Adicionar Tag</a>
+                                 </div>
+
+                                 <div id="adicionarTagDiv" class="collapse">
+                                     <br/>
+                                     <div class="input-group input-group-md">
+                                         <span class="input-group-addon">Tag</span>
+                                         <input class="form-control input-size-fixed" placeholder="Tag do passageiro" id="tagPassageiroInput">
+                                     </div>
+                                 </div>
+
+                             </br>
+                                 <div class="input-group input-group-md">
+                                     <input class="btn btn-primary btn-md" type="submit" value="Cadastrar">
+                                 </div>
+                             </div>
+                        </form>
+
+                    </div>
+                    <br>
+                    <div class="alert alert-success collapse" id="resultPassageiro">
+                      <strong>Sucesso</strong><p>Passageiro cadastrado com sucesso</p>
                     </div>
                 </div>
+
             </div>
 
             <div id="divCadastroBagagem" class="collapse">
@@ -295,14 +313,17 @@
         $('#divCadastroPassageiro').on('show.bs.collapse', function () {
             $('#divCadastroBagagem').collapse('hide');
             $('#divCadastroTag').collapse('hide');
+            $('#resultPassageiro').collapse('hide');
         });
 
         $('#divCadastroBagagem').on('show.bs.collapse', function () {
             $('#accordion .in').collapse('hide');
+            $('#resultPassageiro').collapse('hide');
         });
 
         $('#divCadastroTag').on('show.bs.collapse', function () {
             $('#accordion .in').collapse('hide');
+            $('#resultPassageiro').collapse('hide');
         });
     </script>
 
@@ -317,11 +338,50 @@
     <!-- Theme JavaScript -->
     <script src="{% static "js/creative.min.js" %}"></script>
     <script type="text/javascript">
+        $('#cadastraPassageiroForm').submit(function(e){
+            e.preventDefault();
+
+          $.ajax({
+              type: 'POST',
+              url: '/passageiros',
+              dataType: 'json',
+              data: {
+                  'nome': $('#nomePassageiroInput').val(),
+                  'sobrenome': $('#sobrenomePassageiroInput').val(),
+                  'documento': $('#documentoPassageiroInput').val(),
+                  'nascimento': $('#nascData').val(),
+                  'nacionalidade': $('#nacionalidadePassageiroInput').val(),
+                  'tag': $('#tagPassageiroInput').val(),
+              },
+              sucess:
+                  $('#resultPassageiro').toggle()
+          });
+
+        var peso = $('#pesoBagagemInput').val();
+        if(peso != "") {
+            $.ajax({
+                type: 'POST',
+                url: '/passageiros/' + $('#documentoPassageiroInput').val() + '/bagagens',
+                dataType: 'json',
+                data: {
+                    'peso': $('#pesoBagagemInput').val(),
+                    'localizacao': $('#localizacaoBagagemInput').val(),
+                    'tag_id': $('#tagBagagemInput').val(),
+                },
+                sucess:
+                    $('#resultPassageiro').html('<strong>Sucesso</strong><p>Passageiro e bagagem cadastrados com sucesso</p>')
+            });
+
+        }
+
+        });
+    </script>
+
+    <script type="text/javascript">
         $('#consultaBagagemForm').submit(function(e){
             e.preventDefault();
           var documento = $('#documentoInput').val();
           $(this).attr('action', "/restAPI/passageiros/" + documento + "/bagagens");
-
           $.ajax({
              url: "/restAPI/passageiros/" + documento + "/bagagens",
              error: function() {
@@ -330,19 +390,18 @@
              dataType: 'json',
              success: function(data) {
                 // var jsonData = JSON.parse(data);
-
                 console.log(data);
                 $.each(data, function(i, item){
-                    $('#info').append('<br/><p>' + 
-                        'Sua bagagem tem peso: ' + item.peso + 'kg</br>' + 
-                        'Atualmente se localiza em: ' + item.localizacao + '</br>' + 
+                    $('#info').append('<br/><p>' +
+                        'Sua bagagem tem peso: ' + item.peso + 'kg</br>' +
+                        'Atualmente se localiza em: ' + item.localizacao + '</br>' +
                         '</p>');
                     console.log(item);
                 });
              },
              type: 'GET'
           });
-        }); 
+        });
     </script>
 
 </body>

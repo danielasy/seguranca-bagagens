@@ -11,6 +11,11 @@ class Bagagem(Document):
     peso = StringField(required=True)
     tag_id = StringField()
 
+class voo(Document):
+    documento = StringField(required=True)
+    numero = StringField(required=True)
+    data = DateTimeField(auto_now=True)
+
 class Passageiro(Document):
     nome = StringField(required=True)
     sobrenome = StringField(required=True)
