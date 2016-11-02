@@ -251,17 +251,22 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-4 col-lg-offset-4 text-center">
-                            <div class="input-group input-group-md">
-                                <span class="input-group-addon">Documento</span>
-                                <input class="form-control input-size-fixed" placeholder="Documento">
-                            </div><br/>
+                        <form action="" name="atualizarBagagem" method="POST" id="atualizarBagagem">
+                            <div class="col-lg-4 col-lg-offset-4 text-center">
+                                <div class="input-group input-group-md">
+                                    <span class="input-group-addon">Documento</span>
+                                    <input class="form-control input-size-fixed" placeholder="Documento" id="documentoAtualizarBagagem">
+                                </div><br/>
 
-                            <div class="input-group input-group-md">
-                                <span class="input-group-addon">Localização</span>
-                                <input class="form-control input-size-fixed" placeholder="Localização">
-                            </div><br/>
-                        </div>
+                                <div class="input-group input-group-md">
+                                    <span class="input-group-addon">Localização</span>
+                                    <input class="form-control input-size-fixed" placeholder="Localização" id="localizacaoAtualizarBagagem">
+                                </div><br/>
+                                <div class="input-group input-group-md">
+                                    <input class="btn btn-primary btn-md" type="submit" value="Atualizar">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -373,6 +378,25 @@
             });
 
         }
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('#atualizarBagagem').submit(function(e){
+            e.preventDefault();
+
+          $.ajax({
+              type: 'POST',
+              url: '/atualizar/localizacao/bagagem',
+              dataType: 'json',
+              data: {
+                  'documento': $('#documentoAtualizarBagagem').val(),
+                  'localizacao': $('#localizacaoAtualizarBagagem').val(),
+              },
+              sucess:
+                  alert("atualizado!")
+          });
 
         });
     </script>

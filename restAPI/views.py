@@ -76,6 +76,24 @@ def bagagens(request, documento):
 
         return JsonResponse(reply)
 
+@csrf_exempt
+def localizacao(request):
+    if request.method == 'POST':
+        localizacao = request.POST.get('localizacao')
+        documento = request.POST.get('documento')
+
+        reply = {}
+
+        try:
+            result = Bagagem.objects(documento=documento)
+            for k in result:
+                k.update(set__localizacao=str(localizacao))
+            reply['result'] = "Ok"
+        except Exception as e:
+            reply['result'] = "Error while saving data to database"
+
+        return JsonResponse(reply)
+
 # @csrf_exempt
 # def leituras(request):
 #     if request.method == 'POST':
