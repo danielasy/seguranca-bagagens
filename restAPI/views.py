@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from .models import Passageiro,Bagagem
+from .models import Passageiro,Bagagem,Tag,Leitura
 from datetime import datetime
 
 '''
@@ -21,6 +21,10 @@ GET     /bagagens
 
 GET     /tags
     lista todas as tags
+POST    /tags
+    cria nova tag
+GET     /tags/<tag_id>
+    lista passageiro ou bagagem relacionada a tag
 
 GET     /leituras
     lista todas as leituras de tags
@@ -45,17 +49,27 @@ def passageiros(request):
 
         try:
             passageiro = Passageiro.objects.create(nome=nome, sobrenome=sobrenome, data_nascimento=datetime.strptime(data_nascimento, '%d/%m/%Y'), documento=documento, nacionalidade=nacionalidade, tag_id=tag)
-            print(passageiro)
             passageiro.save()
             reply['result'] = "ok"
         except Exception as e:
-            print('Deu erro')
             reply['result'] = "Error while saving data to database"
 
         return JsonResponse(reply)
 
 @csrf_exempt
-def bagagens(request, documento):
+def passageiro(request, documento):
+    if request.method == 'GET':
+        result = Passageiro.objects(documento=documento)
+        return HttpResponse(result.to_json(), content_type="application/json")
+
+@csrf_exempt
+def bagagens(request):
+    if request.method == 'GET':
+        result = Bagagem.objects()
+        return HttpResponse(result.to_json(), content_type="application/json")
+
+@csrf_exempt
+def passageiro_bagagens(request, documento):
     if request.method == 'GET':
         result = Bagagem.objects(documento=documento)
         return HttpResponse(result.to_json(), content_type="application/json")
@@ -68,7 +82,6 @@ def bagagens(request, documento):
 
         try:
             bagagem = Bagagem(documento=documento,localizacao=localizacao,peso=peso, tag_id=tag_id)
-            print(bagagem)
             bagagem.save()
             reply['result'] = "ok"
         except Exception as e:
@@ -94,19 +107,46 @@ def localizacao(request):
 
         return JsonResponse(reply)
 
-# @csrf_exempt
-# def leituras(request):
-#     if request.method == 'POST':
-#         tag_id = request.POST['tag_id']
-#         sender_id = request.POST['sender_id']
+@csrf_exempt
+def tags(request):
+    if request.method == 'GET':
+        result = Tag.objects()
+        return HttpResponse(result.to_json(), content_type="application/json")
+    if request.method == 'POST':
+        tag_id = request.POST.get('tag_id')
 
-#         reply = {}
+        reply = {}
 
-#         try:
-#             newInfo = information.objects.create(tag_id=tag_id, sender_id=sender_id)
-#             newInfo.save()
-#             reply['result'] = "ok"
-#         except Exception as e:
-#             reply['result'] = "Error while saving data to database"
+        try:
+            tag = Tag(tag_id=tag_id)
+            tag.save()
+            reply['result'] = "Ok"
+        except Exception as e:
+            reply['result'] = "Error while saving data to database"
 
-#         return JsonResponse(reply)
+        return JsonResponse(reply)
+
+@csrf_exempt
+def tags_identificacao(request, tag_id):
+    if request.method == 'GET':
+        result = Passageiro.objects(tag_id=tag_id)
+        if not result:
+            result = Bagagem.objects(tag_id=tag_id)
+        return HttpResponse(result.to_json(), content_type="application/json")
+
+@csrf_exempt
+def leituras(request):
+    if request.method == 'POST':
+        tag_id = request.POST['tag_id']
+        sender_id = request.POST['sender_id']
+
+        reply = {}
+
+        try:
+            leitura = Leitura.objects.create(tag_id=tag_id, sender_id=sender_id)
+            leitura.save()
+            reply['result'] = "ok"
+        except Exception as e:
+            reply['result'] = "Error while saving data to database"
+
+        return JsonResponse(reply)

@@ -226,7 +226,7 @@
 
                              </br>
                                  <div class="input-group input-group-md">
-                                     <input class="btn btn-primary btn-md" type="submit" value="Cadastrar">
+                                    <input class="btn btn-primary btn-md" type="submit" value="Cadastrar">
                                  </div>
                              </div>
                         </form>
@@ -283,10 +283,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-lg-offset-4 text-center">
-                            <div class="input-group input-group-md">
-                                <span class="input-group-addon">Tag</span>
-                                <input class="form-control input-size-fixed" placeholder="Tag">
-                            </div><br/>
+                            <form action='' name="cadastraTag" id="cadastraTag" method="POST">
+                                <div class="input-group input-group-md">
+                                    <span class="input-group-addon">Tag</span>
+                                    <input id="tagid" class="form-control input-size-fixed" placeholder="Tag">
+                                </div><br/>
+                                <input class="btn btn-primary btn-md" type="submit" value="Cadastrar">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -304,7 +307,7 @@
                 </div>
                 <div class="col-lg-4 col-lg-offset-2 text-center">
                     <i class="fa fa-phone fa-3x sr-contact"></i>
-                    <p>(11)0000-0000</p>
+                    <p>(11) 0000-0000</p>
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x sr-contact"></i>
@@ -346,39 +349,54 @@
         $('#cadastraPassageiroForm').submit(function(e){
             e.preventDefault();
 
-          $.ajax({
-              type: 'POST',
-              url: '/passageiros',
-              dataType: 'json',
-              data: {
-                  'nome': $('#nomePassageiroInput').val(),
-                  'sobrenome': $('#sobrenomePassageiroInput').val(),
-                  'documento': $('#documentoPassageiroInput').val(),
-                  'nascimento': $('#nascData').val(),
-                  'nacionalidade': $('#nacionalidadePassageiroInput').val(),
-                  'tag': $('#tagPassageiroInput').val(),
-              },
-              sucess:
-                  $('#resultPassageiro').toggle()
-          });
-
-        var peso = $('#pesoBagagemInput').val();
-        if(peso != "") {
             $.ajax({
                 type: 'POST',
-                url: '/passageiros/' + $('#documentoPassageiroInput').val() + '/bagagens',
+                url: '/passageiros',
                 dataType: 'json',
                 data: {
-                    'peso': $('#pesoBagagemInput').val(),
-                    'localizacao': $('#localizacaoBagagemInput').val(),
-                    'tag_id': $('#tagBagagemInput').val(),
+                    'nome': $('#nomePassageiroInput').val(),
+                    'sobrenome': $('#sobrenomePassageiroInput').val(),
+                    'documento': $('#documentoPassageiroInput').val(),
+                    'nascimento': $('#nascData').val(),
+                    'nacionalidade': $('#nacionalidadePassageiroInput').val(),
+                    'tag': $('#tagPassageiroInput').val(),
                 },
                 sucess:
-                    $('#resultPassageiro').html('<strong>Sucesso</strong><p>Passageiro e bagagem cadastrados com sucesso</p>')
+                    $('#resultPassageiro').toggle()
             });
 
-        }
+            var peso = $('#pesoBagagemInput').val();
+            if(peso != "") {
+                $.ajax({
+                    type: 'POST',
+                    url: '/passageiros/' + $('#documentoPassageiroInput').val() + '/bagagens',
+                    dataType: 'json',
+                    data: {
+                        'peso': $('#pesoBagagemInput').val(),
+                        'localizacao': $('#localizacaoBagagemInput').val(),
+                        'tag_id': $('#tagBagagemInput').val(),
+                    },
+                    sucess:
+                        $('#resultPassageiro').html('<strong>Sucesso</strong><p>Passageiro e bagagem cadastrados com sucesso</p>')
+                });
+            }
+        });
+    </script>
 
+    <script type="text/javascript">
+        $('#cadastraTag').submit(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/tags',
+                dataType: 'json',
+                data: {
+                    'tag_id': $('#tagid').val()
+                },
+                sucess:
+                    alert("Tag cadastrada!")
+            });
         });
     </script>
 
@@ -386,17 +404,17 @@
         $('#atualizarBagagem').submit(function(e){
             e.preventDefault();
 
-          $.ajax({
-              type: 'POST',
-              url: '/atualizar/localizacao/bagagem',
-              dataType: 'json',
-              data: {
-                  'documento': $('#documentoAtualizarBagagem').val(),
-                  'localizacao': $('#localizacaoAtualizarBagagem').val(),
-              },
-              sucess:
-                  alert("atualizado!")
-          });
+            $.ajax({
+                type: 'POST',
+                url: '/atualizar/localizacao/bagagem',
+                dataType: 'json',
+                data: {
+                    'documento': $('#documentoAtualizarBagagem').val(),
+                    'localizacao': $('#localizacaoAtualizarBagagem').val(),
+                },
+                sucess:
+                    alert("atualizado!")
+            });
 
         });
     </script>
@@ -404,27 +422,34 @@
     <script type="text/javascript">
         $('#consultaBagagemForm').submit(function(e){
             e.preventDefault();
-          var documento = $('#documentoInput').val();
-          $(this).attr('action', "/restAPI/passageiros/" + documento + "/bagagens");
-          $.ajax({
-             url: "/restAPI/passageiros/" + documento + "/bagagens",
-             error: function() {
-                $('#info').html('<p>An error has occurred</p>');
-             },
-             dataType: 'json',
-             success: function(data) {
-                // var jsonData = JSON.parse(data);
-                console.log(data);
-                $.each(data, function(i, item){
-                    $('#info').append('<br/><p>' +
-                        'Sua bagagem tem peso: ' + item.peso + 'kg</br>' +
-                        'Atualmente se localiza em: ' + item.localizacao + '</br>' +
-                        '</p>');
-                    console.log(item);
-                });
-             },
-             type: 'GET'
-          });
+            var documento = $('#documentoInput').val();
+            $.ajax({
+                url: "/restAPI/passageiros/" + documento + "/bagagens",
+                error: function() {
+                    $('#info').html('<p>Um erro ocorreu. Por favor tente novamente mais tarde.</p>');
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if(data.length > 0){
+                        $('#info').html('<br/><p>' +
+                            'Passageiro de documento: ' + documento + '</br>' +
+                            '</p>');
+                        $.each(data, function(i, item){
+                            $('#info').append('<br/><p>' +
+                                'Sua bagagem tem peso: ' + item.peso + 'kg</br>' +
+                                'Atualmente se localiza em: ' + item.localizacao + '</br>' +
+                                '</p>');
+                        });
+                    }
+                    else {
+                        $('#info').html('<br/><p>' +
+                            'Passageiro de documento ' + documento + ' não possui bagagens cadastradas.</br>' +
+                            '</p>');
+                    }
+                    
+                },
+                type: 'GET'
+            });
         });
     </script>
 
