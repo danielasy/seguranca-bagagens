@@ -6,3 +6,7 @@ from datetime import datetime
 @csrf_exempt
 def index(request):
     return render(request, 'index.html', {})
+
+@csrf_exempt
+def administrador(request):
+    return render(request, 'admin.html', {})
