@@ -291,7 +291,7 @@
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
                     <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="nav nav-tabs nav-pills" role="tablist">
                         <li role="presentation" class="active"><a href="#listaPassageiros" aria-controls="listaPassageiros" role="tab" data-toggle="tab" data-tab-remote="/api/passageiros">Passageiros</a></li>
                         <li role="presentation"><a href="#listaBagagens" aria-controls="listaBagagens" role="tab" data-toggle="tab" data-tab-remote="/api/bagagens">Bagagens</a></li>
                         <li role="presentation"><a href="#listaTags" aria-controls="listaTags" role="tab" data-toggle="tab" data-tab-remote="/api/tags">Tags</a></li>
@@ -317,27 +317,18 @@
                             <table class="table table-striped">
                                 <thead>
                                   <tr>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Email</th>
+                                    <th>Documento do Passageiro</th>
+                                    <th>Localizacao</th>
+                                    <th>Peso</th>
+                                    <th>Tag ID</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
+                                  <!-- <tr>
                                     <td>John</td>
                                     <td>Doe</td>
                                     <td>john@example.com</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                  </tr>
-                                  <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                  </tr>
+                                  </tr> -->
                                 </tbody>
                             </table>
                         </div>
@@ -345,27 +336,10 @@
                             <table class="table table-striped">
                                 <thead>
                                   <tr>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Email</th>
+                                    <th>TAG-ID</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                  </tr>
-                                  <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                  </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -373,27 +347,12 @@
                             <table class="table table-striped">
                                 <thead>
                                   <tr>
-                                    <th>Firstname</th>
+                                    <!-- <th>Firstname</th>
                                     <th>Lastname</th>
-                                    <th>Email</th>
+                                    <th>Email</th> -->
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                  </tr>
-                                  <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                  </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -532,7 +491,7 @@
                             'Passageiro de documento ' + documento + ' não possui bagagens cadastradas.</br>' +
                             '</p>');
                     }
-                    
+
                 },
                 type: 'GET'
             });
@@ -574,7 +533,7 @@
             tableTarget = currTabTarget + ' tbody';
             var remoteUrl = $(this).attr('data-tab-remote')
             if (remoteUrl !== '') {
-                $.ajax({              
+                $.ajax({
                     url: remoteUrl,
                     type: 'GET',
                     dataType: 'json',
@@ -584,12 +543,26 @@
                     success: function(data) {
                         if(data.length > 0){
                             $(tableTarget).html('');
-                            $.each(data, function(i, passageiro){
-                                $('#listaPassageiros tbody').append('<tr><td>'+
-                                        passageiro.nome + '</td><td>' +
-                                        passageiro.sobrenome + '</td><td>' +
-                                        passageiro.documento + '</td></tr>');
-                            });
+                            if(currTabTarget == "#listaPassageiros") {
+                                $.each(data, function(i, passageiro){
+                                    $('#listaPassageiros tbody').append('<tr><td>'+
+                                            passageiro.nome + '</td><td>' +
+                                            passageiro.sobrenome + '</td><td>' +
+                                            passageiro.documento + '</td></tr>');
+                                });
+                            } else if(currTabTarget == "#listaBagagens") {
+                                $.each(data, function(i, bagagem){
+                                    $('#listaBagagens tbody').append('<tr><td>'+
+                                            bagagem.documento + '</td><td>' +
+                                            bagagem.localizacao + '</td><td>' +
+                                            bagagem.peso + '</td></tr>');
+                                });
+                            } else if(currTabTarget == "#listaTags") {
+                                $.each(data, function(i, tag){
+                                    $('#listaTags tbody').append('<tr><td>'+
+                                            tag.tag_id + '</td></tr>');
+                                });
+                            }
                         }
                         else {
                             $(tableTarget).html('<br/><p>' +
@@ -600,6 +573,7 @@
                 });
             }
         });
+
     </script>
 
 </body>

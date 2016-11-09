@@ -150,3 +150,7 @@ def leituras(request):
             reply['result'] = "Error while saving data to database"
 
         return JsonResponse(reply)
+
+    else:
+        result = {}
+        return HttpResponse(result.to_json(), content_type="application/json")
