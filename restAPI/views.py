@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import Passageiro,Bagagem,Tag,Leitura
 from datetime import datetime
-
+import json
 '''
 GET     /passageiros
     lista todos os passageiros
@@ -152,5 +152,25 @@ def leituras(request):
         return JsonResponse(reply)
 
     else:
-        result = {}
-        return HttpResponse(result.to_json(), content_type="application/json")
+        json_result = []
+        tags = Tag.objects()
+        for tag in tags:
+            passageiros = Passageiro.objects(tag_id=tag.tag_id)
+            for passageiro in passageiros:
+                each = {'tipo': 'passageiro',
+                'nome': passageiro.nome,
+                'documento': passageiro.documento,
+                'tag': tag.tag_id}
+
+                json_result.append(each)
+
+            bagagens = Bagagem.objects(tag_id=tag.tag_id)
+            for bagagem in bagagens:
+                each = {'tipo': 'bagagem',
+                'localizacao': bagagem.localizacao,
+                'documento': bagagem.documento,
+                'tag': tag.tag_id}
+
+                json_result.append(each)
+
+        return HttpResponse(json.dumps(json_result), content_type="application/json")

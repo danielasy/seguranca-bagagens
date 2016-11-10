@@ -307,6 +307,7 @@
                                     <th>Nome</th>
                                     <th>Sobrenome</th>
                                     <th>Documento</th>
+                                    <th>Tag</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -346,10 +347,12 @@
                         <div role="tabpanel" class="tab-pane" id="listaLeituras">
                             <table class="table table-striped">
                                 <thead>
-                                  <tr>
-                                    <!-- <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Email</th> -->
+                                  <tr id="camposLeitura">
+                                    <th>Tipo</th>
+                                    <th>Documento</th>
+                                    <th>Tag</th>
+                                    <th>Nome</th>
+                                    <th>Localizacao</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -548,19 +551,40 @@
                                     $('#listaPassageiros tbody').append('<tr><td>'+
                                             passageiro.nome + '</td><td>' +
                                             passageiro.sobrenome + '</td><td>' +
-                                            passageiro.documento + '</td></tr>');
+                                            passageiro.documento + '</td><td>' +
+                                            passageiro.tag_id + '</td></tr>');
                                 });
                             } else if(currTabTarget == "#listaBagagens") {
                                 $.each(data, function(i, bagagem){
                                     $('#listaBagagens tbody').append('<tr><td>'+
                                             bagagem.documento + '</td><td>' +
                                             bagagem.localizacao + '</td><td>' +
-                                            bagagem.peso + '</td></tr>');
+                                            bagagem.peso + '</td><td>' +
+                                            bagagem.tag_id + '</td></tr>');
                                 });
                             } else if(currTabTarget == "#listaTags") {
                                 $.each(data, function(i, tag){
                                     $('#listaTags tbody').append('<tr><td>'+
                                             tag.tag_id + '</td></tr>');
+                                });
+                            }  else if(currTabTarget == "#listaLeituras") {
+                                $.each(data, function(i, leitura){
+                                    if(leitura.tipo === "passageiro") {
+                                        $('#listaLeituras tbody').append('<tr><td>'+
+                                                "passageiro" + '</td><td>' +
+                                                leitura.documento + '</td><td>' +
+                                                leitura.tag + '</td><td>' +
+                                                leitura.nome + '</td><td>' +
+                                                "-" + '</td></tr>');
+                                    } else {
+                                        $('#listaLeituras tbody').append('<tr><td>'+
+                                                "bagagem" + '</td><td>' +
+                                                leitura.documento + '</td><td>' +
+                                                leitura.tag + '</td><td>' +
+                                                "-" + '</td><td>' +
+                                                leitura.localizacao + '</td></tr>');
+                                    }
+
                                 });
                             }
                         }

@@ -11,4 +11,5 @@ urlpatterns  = [
     url(r'passageiros', views.passageiros, name="passageiros"),
     url(r'bagagens', views.bagagens, name="bagagens"),
     url(r'tags', views.tags, name="tags"),
+    url(r'leituras', views.leituras, name="leituras"),
 ]
